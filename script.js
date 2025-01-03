@@ -20,9 +20,6 @@ const dateInput = $("#date");
 let items = [];
 let index = 0;
 
-// const GITHUB_RESPO_NAME = "Flashcard";
-// const GITHUB_RESPO_NAME = "";
-
 async function getData() {
     try {
         const time = dateInput.value;
