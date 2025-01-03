@@ -78,8 +78,9 @@ async function resetData() {
     changeContent(items, index);
 }
 
-window.addEventListener("load", () => {
+window.onload = () => {
     const date = new Date();
+    console.log(date);
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
     const day = date.getDate();
@@ -88,7 +89,7 @@ window.addEventListener("load", () => {
     }`;
     resetData();
     resetButton.onclick = resetData;
-});
+};
 
 window.onkeydown = e => {
     if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
