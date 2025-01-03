@@ -27,7 +27,7 @@ async function getData() {
     try {
         const time = dateInput.value;
         const response = await fetch(
-            `/data/${time}.json?nocache=${new Date().getTime()}`
+            `./data/${time}.json?nocache=${new Date().getTime()}`
         );
         const data = await response.json();
         // console.log(data);
