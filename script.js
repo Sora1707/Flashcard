@@ -20,11 +20,13 @@ const dateInput = $("#date");
 let items = [];
 let index = 0;
 
+const GITHUB_RESPO_NAME = "Flashcard";
+
 async function getData() {
     try {
         const time = dateInput.value;
         const response = await fetch(
-            `data/${time}.json?nocache=${new Date().getTime()}`
+            `${GITHUB_RESPO_NAME}/data/${time}.json?nocache=${new Date().getTime()}`
         );
         const data = await response.json();
         // console.log(data);
