@@ -17,6 +17,9 @@ const resetButton = $("#reset");
 const count = $("#count");
 const dateInput = $("#date");
 
+const leftButton = $("#left-button");
+const rightButton = $("#right-button");
+
 let items = [];
 let index = 0;
 
@@ -92,6 +95,18 @@ window.onkeydown = e => {
     if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
     index += e.key === "ArrowRight" ? 1 : -1;
     if (index < 0) index = items.length - 1;
+    if (index > items.length - 1) index = 0;
+    changeContent(items, index);
+};
+
+leftButton.onclick = e => {
+    index -= 1;
+    if (index < 0) index = items.length - 1;
+    changeContent(items, index);
+};
+
+rightButton.onclick = e => {
+    index += 1;
     if (index > items.length - 1) index = 0;
     changeContent(items, index);
 };
