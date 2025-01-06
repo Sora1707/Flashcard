@@ -23,20 +23,6 @@ const rightButton = $("#right-button");
 let items = [];
 let index = 0;
 
-async function getData() {
-    try {
-        const time = dateInput.value;
-        const response = await fetch(
-            `./data/${time}.json?nocache=${new Date().getTime()}`
-        );
-        const data = await response.json();
-        // console.log(data);
-        return data;
-    } catch (e) {
-        return [];
-    }
-}
-
 function contentModify(content) {
     let begin = -1,
         end = -1;
@@ -70,25 +56,19 @@ function changeContent(items, index) {
     }
 }
 
-async function resetData() {
-    items = await getData();
-    console.log(items);
-    items = shuffleArray(items);
-    index = 0;
-    changeContent(items, index);
-}
-
 window.onload = () => {
     const date = new Date();
-    console.log(date);
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
     const day = date.getDate();
     dateInput.value = `${year}-${month < 10 ? "0" + month : month}-${
         day < 10 ? "0" + day : day
     }`;
-    resetData();
-    resetButton.onclick = resetData;
+    resetData([dateInput.value]);
+    resetButton.onclick = () => {
+        const date = dateInput.value;
+        resetData([date]);
+    };
 };
 
 window.onkeydown = e => {
