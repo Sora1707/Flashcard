@@ -1,0 +1,37 @@
+@font-face {
+    font-family: "Mamelon"; /* The name you'll use in your CSS */
+    src: url(../font/Mamelon-3.5-Hi-Regular.otf) format("opentype");
+    font-weight: normal; /* Optional: Define the font weight */
+    font-style: normal; /* Optional: Define the font style */
+}
+@font-face {
+    font-family: "Baloo"; /* The name you'll use in your CSS */
+    src: url(../font/baloo.regular.ttf) format("opentype");
+    font-weight: normal; /* Optional: Define the font weight */
+    font-style: normal; /* Optional: Define the font style */
+}
+@font-face {
+    font-family: "Ganh"; /* The name you'll use in your CSS */
+    src: url("../font/Ganh Type - Regular.otf") format("opentype");
+    font-weight: normal; /* Optional: Define the font weight */
+    font-style: normal; /* Optional: Define the font style */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+button {
+    padding: 10px 20px;
+    border-radius: 10px;
+    border-color: transparent;
+    font-family: "baloo";
+    font-size: 1.2rem;
+}
+
+button:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}

@@ -1,0 +1,42 @@
+.navbar {
+    display: flex;
+    justify-content: left;
+    background-color: #333;
+    padding: 10px;
+}
+
+.nav-date-input {
+    font-family: "Baloo";
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border-radius: 10px;
+    background-color: #444;
+    color: white;
+}
+
+.nav-button {
+    background-color: #444;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.navbar .chosen {
+    background-color: white;
+    color: black;
+}
+
+.nav-button:hover {
+    background-color: #555;
+    transform: scale(1.1);
+}
+
+.nav-button:active {
+    background-color: #222;
+}
