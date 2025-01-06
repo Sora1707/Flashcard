@@ -91,4 +91,7 @@ rightButton.onclick = e => {
     changeContent(items, index);
 };
 
-dateInput.onchange = resetData;
+dateInput.onchange = e => {
+    const date = dateInput.value;
+    resetData([date]);
+};
