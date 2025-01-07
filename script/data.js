@@ -1,22 +1,21 @@
-async function getData(dates) {
-    try {
-        const data = [];
-        for (const date of dates) {
+async function getData(dateStrings) {
+    const data = [];
+    for (const dateString of dateStrings) {
+        try {
             const response = await fetch(
-                `./data/${date}.json?nocache=${new Date().getTime()}`
+                `./data/${dateString}.json?nocache=${new Date().getTime()}`
             );
             const result = await response.json();
             data.push(...result);
+        } catch (e) {
+            // console.log(`[WARNING] There is no file "${dateString}.json"`);
         }
-        return data;
-    } catch (e) {
-        return [];
     }
+    return data;
 }
 
-async function resetData(dates) {
-    items = await getData(dates);
-    console.log(items);
+async function resetData(dateStrings) {
+    items = await getData(dateStrings);
     items = shuffleArray(items);
     index = 0;
     changeContent(items, index);
