@@ -26,11 +26,13 @@ function changeContent(items, index) {
         pronunciation.textContent = item.pronunciation;
         meaning.textContent = item.meaning;
         count.textContent = `${index + 1}/${wordMax}`;
+        wordTotal.textContent = `${items.length} words`;
     } else {
         content.innerHTML = "何もない";
         pronunciation.textContent = "";
         meaning.textContent = "";
         count.textContent = "0/0";
+        wordTotal.textContent = `0 word`;
     }
 }
 

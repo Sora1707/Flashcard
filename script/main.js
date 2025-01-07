@@ -4,13 +4,17 @@ const $$ = document.querySelectorAll.bind(document);
 const content = $("#content");
 const pronunciation = $("#pronunciation");
 const meaning = $("#meaning");
+
 const resetButton = $("#reset");
+
 const count = $("#count");
-const dateInput = $("#date");
-const wordLimitInput = $("#word-limit");
+const wordTotal = $("#total-words");
 
 const leftButton = $("#left-button");
 const rightButton = $("#right-button");
+
+const wordLimitInput = $("#word-limit");
+const dateInput = $("#date");
 
 const MIN_REVIEW_WORDS = 10;
 const MAX_REVIEW_WORDS = 30;
@@ -34,10 +38,7 @@ window.onload = async () => {
 
     items = await getData([dateInput.value]);
     resetItems();
+    changeContent(items, index);
 
-    resetButton.onclick = () => {
-        const wordLimit = parseInt(wordLimitInput.value);
-        const wordCount = Math.min(wordLimit, items.length);
-        resetItems();
-    };
+    resetButton.onclick = resetItems;
 };
