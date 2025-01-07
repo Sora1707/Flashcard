@@ -11,9 +11,7 @@ $$(".nav-button").forEach(
             const dates = dateGenerate(new Date(), -value);
             const dateStrings = dates.map(date => dateString(date));
             items = await getData(dateStrings);
-            items = shuffleArray(items);
-            index = 0;
-            changeContent(items, index);
+            resetItems();
         })
 );
 
@@ -23,9 +21,7 @@ dateInput.onchange = async e => {
     chosen(e);
     const dateString = e.target.value;
     items = await getData([dateString]);
-    items = shuffleArray(items);
-    index = 0;
-    changeContent(items, index);
+    resetItems();
 };
 
 function validateNumberInput(e) {

@@ -18,15 +18,26 @@ const MAX_REVIEW_WORDS = 30;
 let items = [];
 let index = 0;
 
-window.onload = () => {
+async function resetItems() {
+    items = shuffleArray(items);
+    index = 0;
+    changeContent(items, index);
+}
+
+window.onload = async () => {
     wordLimitInput.setAttribute("min", MIN_REVIEW_WORDS);
     wordLimitInput.setAttribute("max", MAX_REVIEW_WORDS);
     wordLimitInput.value = MIN_REVIEW_WORDS;
 
-    dateInput.value = dateString(new Date());
-    resetData([dateInput.value]);
+    const today = new Date();
+    dateInput.value = dateString(today);
+
+    items = await getData([dateInput.value]);
+    resetItems();
+
     resetButton.onclick = () => {
-        const date = dateInput.value;
-        resetData([date]);
+        const wordLimit = parseInt(wordLimitInput.value);
+        const wordCount = Math.min(wordLimit, items.length);
+        resetItems();
     };
 };

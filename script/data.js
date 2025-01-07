@@ -13,10 +13,3 @@ async function getData(dateStrings) {
     }
     return data;
 }
-
-async function resetData(dateStrings) {
-    items = await getData(dateStrings);
-    items = shuffleArray(items);
-    index = 0;
-    changeContent(items, index);
-}

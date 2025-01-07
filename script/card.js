@@ -17,12 +17,15 @@ function contentModify(content) {
 }
 
 function changeContent(items, index) {
+    const wordLimit = parseInt(wordLimitInput.value);
+    const wordMax = Math.min(wordLimit, items.length);
+
     if (items.length > 0) {
         const item = items[index];
         content.innerHTML = contentModify(item.content);
         pronunciation.textContent = item.pronunciation;
         meaning.textContent = item.meaning;
-        count.textContent = `${index + 1}/${items.length}`;
+        count.textContent = `${index + 1}/${wordMax}`;
     } else {
         content.innerHTML = "何もない";
         pronunciation.textContent = "";
@@ -40,13 +43,17 @@ window.onkeydown = e => {
 };
 
 leftButton.onclick = e => {
+    const wordLimit = parseInt(wordLimitInput.value);
+    const wordMax = Math.min(wordLimit, items.length);
     index -= 1;
-    if (index < 0) index = items.length - 1;
+    if (index < 0) index = wordMax - 1;
     changeContent(items, index);
 };
 
 rightButton.onclick = e => {
+    const wordLimit = parseInt(wordLimitInput.value);
+    const wordMax = Math.min(wordLimit, items.length);
     index += 1;
-    if (index > items.length - 1) index = 0;
+    if (index >= wordMax) index = 0;
     changeContent(items, index);
 };
