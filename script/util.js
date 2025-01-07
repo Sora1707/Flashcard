@@ -11,6 +11,12 @@ function dateString(date) {
     return date.toISOString().split("T")[0];
 }
 
+function dayBeforeAfter(date, days) {
+    newDate = new Date(date);
+    newDate.setDate(date.getDate() + days);
+    return newDate;
+}
+
 function dateGenerate(startDate, days) {
     const dates = [];
 
@@ -18,9 +24,7 @@ function dateGenerate(startDate, days) {
     days = days * sign;
 
     for (let i = 0; i < days; i++) {
-        const date = new Date(startDate);
-        date.setDate(date.getDate() + i * sign);
-        dates.push(date);
+        dates.push(dayBeforeAfter(startDate, i * sign));
     }
     return dates;
 }
