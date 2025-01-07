@@ -3,12 +3,16 @@ async function getData(dateStrings) {
     for (const dateString of dateStrings) {
         try {
             const response = await fetch(
-                `./data/${dateString}.json?nocache=${new Date().getTime()}`
+                `./data/${dateString}.yaml?nocache=${new Date().getTime()}`
             );
-            const result = await response.json();
+            if (!response.ok) {
+                throw new Error(`File "${dateString}.yaml not found"`);
+            }
+            const text = await response.text();
+            const result = jsyaml.load(text);
             data.push(...result);
         } catch (e) {
-            // console.log(`[WARNING] There is no file "${dateString}.json"`);
+            console.log(e);
         }
     }
     return data;
