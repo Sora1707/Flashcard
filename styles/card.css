@@ -16,11 +16,13 @@
 #card #content {
     font-family: "Mamelon";
     text-align: center;
+    margin-bottom: 20px;
 }
 
 #card #pronunciation {
     font-family: "Mamelon";
     color: red;
+    margin-bottom: 20px;
 }
 
 #card #meaning {
