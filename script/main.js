@@ -19,6 +19,7 @@ const dateInput = $("#date");
 const MIN_REVIEW_WORDS = 10;
 const MAX_REVIEW_WORDS = 30;
 
+let config = {};
 let items = [];
 let index = 0;
 
@@ -28,10 +29,25 @@ async function resetItems() {
     changeContent(items, index);
 }
 
+function loadConfig() {
+    const config = localStorage.getItem("config");
+    return config
+        ? JSON.parse(config)
+        : {
+              wordLimit: MIN_REVIEW_WORDS,
+          };
+}
+
+function saveConfig(config) {
+    localStorage.setItem("config", JSON.stringify(config));
+}
+
 window.onload = async () => {
+    config = loadConfig();
+
     wordLimitInput.setAttribute("min", MIN_REVIEW_WORDS);
     wordLimitInput.setAttribute("max", MAX_REVIEW_WORDS);
-    wordLimitInput.value = MIN_REVIEW_WORDS;
+    wordLimitInput.value = config.wordLimit;
 
     const today = new Date();
     dateInput.value = dateString(today);

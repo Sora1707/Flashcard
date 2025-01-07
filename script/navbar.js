@@ -29,6 +29,9 @@ function validateNumberInput(e) {
     if (value < MIN_REVIEW_WORDS) value = MIN_REVIEW_WORDS;
     else if (value > MAX_REVIEW_WORDS) value = 30;
     e.target.value = value;
+
+    config.wordLimit = value;
+    saveConfig(config);
 }
 
 $(".nav-number-input").onkeydown = e => {
