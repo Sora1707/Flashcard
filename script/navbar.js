@@ -27,3 +27,18 @@ dateInput.onchange = async e => {
     index = 0;
     changeContent(items, index);
 };
+
+function validateNumberInput(e) {
+    let value = e.target.value;
+    if (value < MIN_REVIEW_WORDS) value = MIN_REVIEW_WORDS;
+    else if (value > MAX_REVIEW_WORDS) value = 30;
+    e.target.value = value;
+}
+
+$(".nav-number-input").onkeydown = e => {
+    if (e.key === "Enter") validateNumberInput(e);
+};
+
+$(".nav-number-input").onblur = e => {
+    validateNumberInput(e);
+};

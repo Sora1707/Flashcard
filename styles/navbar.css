@@ -40,3 +40,13 @@
 .nav-button:active {
     background-color: #222;
 }
+
+.nav-number-input {
+    font-family: "Baloo";
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border-radius: 10px;
+    background-color: white;
+    color: black;
+}
