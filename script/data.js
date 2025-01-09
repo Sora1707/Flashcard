@@ -17,3 +17,10 @@ async function getData(dateStrings) {
     }
     return data;
 }
+
+async function getDataInDateRange(startDate, value) {
+    const dates = dateGenerate(new Date(), value);
+    const dateStrings = dates.map(date => dateString(date));
+    items = await getData(dateStrings);
+    return items;
+}

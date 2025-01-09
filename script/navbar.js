@@ -8,20 +8,23 @@ $$(".nav-button").forEach(
         (button.onclick = async e => {
             chosen(e);
             const value = parseInt(e.target.dataset.value);
-            const dates = dateGenerate(new Date(), -value);
-            const dateStrings = dates.map(date => dateString(date));
-            items = await getData(dateStrings);
-            resetItems();
+            items = await getDataInDateRange(new Date(), -value);
+            shuffle();
         })
 );
 
-dateInput.onclick = chosen;
+dateInput.onclick = async e => {
+    chosen(e);
+    const dateString = e.target.value;
+    items = await getData([dateString]);
+    shuffle();
+};
 
 dateInput.onchange = async e => {
     chosen(e);
     const dateString = e.target.value;
     items = await getData([dateString]);
-    resetItems();
+    shuffle();
 };
 
 function validateNumberInput(e) {

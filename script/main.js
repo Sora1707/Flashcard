@@ -5,7 +5,7 @@ const content = $("#content");
 const pronunciation = $("#pronunciation");
 const meaning = $("#meaning");
 
-const resetButton = $("#reset");
+const shuffleButton = $("#shuffle");
 
 const count = $("#count");
 const wordTotal = $("#total-words");
@@ -23,10 +23,18 @@ let config = {};
 let items = [];
 let index = 0;
 
-async function resetItems() {
+function shuffle() {
     items = shuffleArray(items);
     index = 0;
     changeContent(items, index);
+}
+
+async function resetItems() {
+    const chosen = $(".chosen");
+    const value = parseInt(chosen.dataset.value);
+    const date = value == 1 ? new Date(dateInput.value) : new Date();
+    items = await getDataInDateRange(date, -value);
+    shuffle();
 }
 
 function loadConfig() {
@@ -53,8 +61,7 @@ window.onload = async () => {
     dateInput.value = dateString(today);
 
     items = await getData([dateInput.value]);
-    resetItems();
-    changeContent(items, index);
+    shuffle();
 
-    resetButton.onclick = resetItems;
+    shuffleButton.onclick = resetItems;
 };
