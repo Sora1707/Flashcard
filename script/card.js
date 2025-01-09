@@ -1,19 +1,23 @@
 function contentModify(content) {
-    let begin = -1,
-        end = -1;
+    const highlights = [];
     for (let i = 0; i < content.length; ++i) {
-        if (content[i] === "[") begin = i;
-        else if (content[i] === "]") end = i;
+        if (content[i] === "[") highlights.push(i);
+        else if (content[i] === "]") highlights.push(i);
     }
-    if (begin === -1 || end === -1)
+    if (highlights.length === 0)
         return `<span class="highlight">${content}</span>`;
-    content =
-        content.slice(0, begin) +
-        "<span class='highlight'>" +
-        content.slice(begin + 1, end) +
-        "</span>" +
-        content.slice(end + 1);
-    return content;
+    let result = "";
+    let begin = 0;
+    for (let i = 0; i < highlights.length; i += 2) {
+        result += content.slice(begin, highlights[i]);
+        result +=
+            "<span class='highlight'>" +
+            content.slice(highlights[i] + 1, highlights[i + 1]) +
+            "</span>";
+        begin = highlights[i + 1] + 1;
+    }
+    result += content.slice(begin);
+    return result;
 }
 
 function changeContent(items, index) {
@@ -38,9 +42,11 @@ function changeContent(items, index) {
 
 window.onkeydown = e => {
     if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+    const wordLimit = parseInt(wordLimitInput.value);
+    const wordMax = Math.min(wordLimit, items.length);
     index += e.key === "ArrowRight" ? 1 : -1;
-    if (index < 0) index = items.length - 1;
-    if (index > items.length - 1) index = 0;
+    if (index < 0) index = wordMax - 1;
+    if (index >= wordMax) index = 0;
     changeContent(items, index);
 };
 
