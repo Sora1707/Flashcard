@@ -63,5 +63,5 @@ window.onload = async () => {
     items = await getData([dateInput.value]);
     shuffle();
 
-    shuffleButton.onclick = shuffle;
+    shuffleButton.onclick = resetItems;
 };
