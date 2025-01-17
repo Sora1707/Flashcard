@@ -40,6 +40,12 @@ button#shuffle {
     left: 30px;
 }
 
+button#reveal {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+}
+
 #count {
     position: absolute;
     left: 50%;

@@ -19,7 +19,7 @@ async function getData(dateStrings) {
 }
 
 async function getDataInDateRange(startDate, value) {
-    const dates = dateGenerate(new Date(), value);
+    const dates = dateGenerate(startDate, value);
     const dateStrings = dates.map(date => dateString(date));
     items = await getData(dateStrings);
     return items;

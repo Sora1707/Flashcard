@@ -40,28 +40,48 @@ function changeContent(items, index) {
     }
 }
 
-window.onkeydown = e => {
-    if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
-    const wordLimit = parseInt(wordLimitInput.value);
-    const wordMax = Math.min(wordLimit, items.length);
-    index += e.key === "ArrowRight" ? 1 : -1;
-    if (index < 0) index = wordMax - 1;
-    if (index >= wordMax) index = 0;
-    changeContent(items, index);
-};
-
-leftButton.onclick = e => {
+function moveForward() {
+    if (!content.classList.contains("invisible")) {
+        content.classList.toggle("invisible");
+    }
+    if (!pronunciation.classList.contains("invisible")) {
+        pronunciation.classList.toggle("invisible");
+    }
     const wordLimit = parseInt(wordLimitInput.value);
     const wordMax = Math.min(wordLimit, items.length);
     index -= 1;
     if (index < 0) index = wordMax - 1;
     changeContent(items, index);
-};
+}
 
-rightButton.onclick = e => {
+function moveBackward() {
+    if (!content.classList.contains("invisible")) {
+        content.classList.toggle("invisible");
+    }
+    if (!pronunciation.classList.contains("invisible")) {
+        pronunciation.classList.toggle("invisible");
+    }
+
     const wordLimit = parseInt(wordLimitInput.value);
     const wordMax = Math.min(wordLimit, items.length);
     index += 1;
     if (index >= wordMax) index = 0;
     changeContent(items, index);
+}
+
+window.onkeydown = e => {
+    if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+    const wordLimit = parseInt(wordLimitInput.value);
+    const wordMax = Math.min(wordLimit, items.length);
+    if (e.key === "ArrowLeft") moveBackward();
+    else moveForward();
+};
+
+leftButton.onclick = moveBackward;
+
+rightButton.onclick = moveForward;
+
+revealButton.onclick = e => {
+    content.classList.toggle("invisible");
+    pronunciation.classList.toggle("invisible");
 };
