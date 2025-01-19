@@ -7,7 +7,7 @@ function shuffleArray(arr) {
     return new_arr;
 }
 
-function dateString(date) {
+function getDateString(date) {
     return date.toISOString().split("T")[0];
 }
 

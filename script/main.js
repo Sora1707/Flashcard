@@ -1,3 +1,5 @@
+const START_DATE = new Date("2024-12-31");
+
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
@@ -34,7 +36,7 @@ async function resetItems() {
     const chosen = $(".chosen");
     const value = parseInt(chosen.dataset.value);
     const date = value == 1 ? new Date(dateInput.value) : new Date();
-    items = await getDataInDateRange(date, -value);
+    items = await getData(date, value);
     shuffle();
 }
 
@@ -59,9 +61,8 @@ window.onload = async () => {
     wordLimitInput.value = config.wordLimit;
 
     const today = new Date();
-    dateInput.value = dateString(today);
-
-    items = await getData([dateInput.value]);
+    dateInput.value = getDateString(today);
+    items = await getData(new Date(dateInput.value), 1);
     shuffle();
 
     shuffleButton.onclick = resetItems;

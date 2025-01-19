@@ -1,6 +1,12 @@
-async function getData(dateStrings) {
+/***
+ * Get data from `startDate` backwards by `days`
+ */
+async function getData(startDate, days) {
+    let currentDate = new Date(startDate);
+    let count = 0;
     const data = [];
-    for (const dateString of dateStrings) {
+    while (count < days && currentDate >= START_DATE) {
+        const dateString = getDateString(currentDate);
         try {
             const response = await fetch(
                 `./data/${dateString}.yaml?nocache=${new Date().getTime()}`
@@ -10,17 +16,13 @@ async function getData(dateStrings) {
             }
             const text = await response.text();
             const result = jsyaml.load(text);
+            count += 1;
             data.push(...result);
         } catch (e) {
-            console.log(e);
+            // console.log(e);
         }
+        currentDate = dayBeforeAfter(currentDate, -1);
+        if (days == 1) break; // to display whether that day was recorded
     }
     return data;
-}
-
-async function getDataInDateRange(startDate, value) {
-    const dates = dateGenerate(startDate, value);
-    const dateStrings = dates.map(date => dateString(date));
-    items = await getData(dateStrings);
-    return items;
 }

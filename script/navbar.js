@@ -8,7 +8,7 @@ $$(".nav-button.review").forEach(
         (button.onclick = async e => {
             chosen(e);
             const value = parseInt(e.target.dataset.value);
-            items = await getDataInDateRange(new Date(), -value);
+            items = await getData(new Date(), value);
             shuffle();
         })
 );
@@ -16,14 +16,14 @@ $$(".nav-button.review").forEach(
 dateInput.onclick = async e => {
     chosen(e);
     const dateString = e.target.value;
-    items = await getData([dateString]);
+    items = await getData(new Date(dateString), 1);
     shuffle();
 };
 
 dateInput.onchange = async e => {
     chosen(e);
     const dateString = e.target.value;
-    items = await getData([dateString]);
+    items = await getData(new Date(dateString), 1);
     shuffle();
 };
 
