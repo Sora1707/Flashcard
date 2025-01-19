@@ -3,7 +3,7 @@ function chosen(e) {
     e.target.classList.add("chosen");
 }
 
-$$(".nav-button").forEach(
+$$(".nav-button.review").forEach(
     button =>
         (button.onclick = async e => {
             chosen(e);

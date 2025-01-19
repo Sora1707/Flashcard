@@ -24,48 +24,49 @@ function changeContent(items, index) {
     const wordLimit = parseInt(wordLimitInput.value);
     const wordMax = Math.min(wordLimit, items.length);
 
-    if (items.length > 0) {
-        const item = items[index];
-        content.innerHTML = contentModify(item.content);
-        pronunciation.textContent = item.pronunciation;
-        meaning.textContent = item.meaning;
-        count.textContent = `${index + 1}/${wordMax}`;
-        wordTotal.textContent = `${items.length} words`;
-    } else {
+    if (items.length === 0) {
         content.innerHTML = "何もない";
         pronunciation.textContent = "";
         meaning.textContent = "";
         count.textContent = "0/0";
         wordTotal.textContent = `0 word`;
+        return;
+    }
+
+    const item = items[index];
+    content.innerHTML = contentModify(item.content);
+    pronunciation.textContent = item.pronunciation;
+    meaning.textContent = item.meaning;
+    count.textContent = `${index + 1}/${wordMax}`;
+    wordTotal.textContent = `${items.length} words`;
+
+    if (reviewButton.classList.contains("chosen")) {
+        if (item.meaning === "") {
+            content.classList.remove("invisible");
+            pronunciation.classList.remove("invisible");
+        } else {
+            content.classList.add("invisible");
+            pronunciation.classList.add("invisible");
+        }
+    } else {
+        content.classList.remove("invisible");
+        pronunciation.classList.remove("invisible");
     }
 }
 
 function moveForward() {
-    if (!content.classList.contains("invisible")) {
-        content.classList.toggle("invisible");
-    }
-    if (!pronunciation.classList.contains("invisible")) {
-        pronunciation.classList.toggle("invisible");
-    }
-    const wordLimit = parseInt(wordLimitInput.value);
-    const wordMax = Math.min(wordLimit, items.length);
-    index -= 1;
-    if (index < 0) index = wordMax - 1;
-    changeContent(items, index);
-}
-
-function moveBackward() {
-    if (!content.classList.contains("invisible")) {
-        content.classList.toggle("invisible");
-    }
-    if (!pronunciation.classList.contains("invisible")) {
-        pronunciation.classList.toggle("invisible");
-    }
-
     const wordLimit = parseInt(wordLimitInput.value);
     const wordMax = Math.min(wordLimit, items.length);
     index += 1;
     if (index >= wordMax) index = 0;
+    changeContent(items, index);
+}
+
+function moveBackward() {
+    const wordLimit = parseInt(wordLimitInput.value);
+    const wordMax = Math.min(wordLimit, items.length);
+    index -= 1;
+    if (index < 0) index = wordMax - 1;
     changeContent(items, index);
 }
 
@@ -81,7 +82,9 @@ leftButton.onclick = moveBackward;
 
 rightButton.onclick = moveForward;
 
-revealButton.onclick = e => {
-    content.classList.toggle("invisible");
-    pronunciation.classList.toggle("invisible");
+reviewButton.onclick = e => {
+    const reviewOn = !e.target.classList.contains("chosen");
+    e.target.textContent = reviewOn ? "review: On" : "review: Off";
+    e.target.classList.toggle("chosen");
+    changeContent(items, index);
 };

@@ -40,10 +40,15 @@ button#shuffle {
     left: 30px;
 }
 
-button#reveal {
+button#review {
     position: absolute;
     top: 30px;
     right: 30px;
+}
+
+button#review.chosen {
+    color: white;
+    background-color: black;
 }
 
 #count {

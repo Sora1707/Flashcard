@@ -6,7 +6,7 @@ const pronunciation = $("#pronunciation");
 const meaning = $("#meaning");
 
 const shuffleButton = $("#shuffle");
-const revealButton = $("#reveal");
+const reviewButton = $("#review");
 
 const count = $("#count");
 const wordTotal = $("#total-words");
